@@ -1,0 +1,275 @@
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
+local Player = game:GetService("Players").LocalPlayer
+
+local ScreenGui = Instance.new("ScreenGui", CoreGui)
+ScreenGui.Name = "AMIN_UI"
+
+local OpenButton = Instance.new("TextButton")
+OpenButton.Name = "OpenButton"
+OpenButton.Text = "AMIN"
+OpenButton.Size = UDim2.new(0, 120, 0, 40)
+OpenButton.Position = UDim2.new(0.5, -60, 0, 40)
+OpenButton.BackgroundColor3 = Color3.fromRGB(70, 0, 90)
+OpenButton.BorderColor3 = Color3.fromRGB(170, 0, 255)
+OpenButton.BorderSizePixel = 2
+OpenButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenButton.Font = Enum.Font.GothamBold
+OpenButton.TextSize = 18
+OpenButton.Parent = ScreenGui
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 650, 0, 420)
+MainFrame.Position = UDim2.new(0.5, -325, 0.5, -210)
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 0, 25)
+MainFrame.BackgroundTransparency = 0.1
+MainFrame.BorderColor3 = Color3.fromRGB(170, 0, 255)
+MainFrame.BorderSizePixel = 2
+MainFrame.Visible = false
+MainFrame.Parent = ScreenGui
+
+local TopBar = Instance.new("Frame")
+TopBar.Size = UDim2.new(1, 0, 0, 40)
+TopBar.BackgroundColor3 = Color3.fromRGB(40, 0, 70)
+TopBar.BorderColor3 = Color3.fromRGB(170, 0, 255)
+TopBar.BorderSizePixel = 2
+TopBar.Parent = MainFrame
+
+local Title = Instance.new("TextLabel")
+Title.Text = "AMIN experimental"
+Title.Size = UDim2.new(1, -50, 1, 0)
+Title.Position = UDim2.new(0, 10, 0, 0)
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 18
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Parent = TopBar
+
+local CloseButton = Instance.new("TextButton")
+CloseButton.Text = "X"
+CloseButton.Size = UDim2.new(0, 40, 0, 40)
+CloseButton.Position = UDim2.new(1, -40, 0, 0)
+CloseButton.BackgroundColor3 = Color3.fromRGB(70, 0, 90)
+CloseButton.BorderColor3 = Color3.fromRGB(170, 0, 255)
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.TextSize = 18
+CloseButton.Parent = TopBar
+
+local TabHolder = Instance.new("Frame")
+TabHolder.Size = UDim2.new(0, 150, 1, -40)
+TabHolder.Position = UDim2.new(0, 0, 0, 40)
+TabHolder.BackgroundColor3 = Color3.fromRGB(25, 0, 45)
+TabHolder.BorderColor3 = Color3.fromRGB(170, 0, 255)
+TabHolder.BorderSizePixel = 2
+TabHolder.Parent = MainFrame
+
+local ContentFrame = Instance.new("Frame")
+ContentFrame.Size = UDim2.new(1, -150, 1, -40)
+ContentFrame.Position = UDim2.new(0, 150, 0, 40)
+ContentFrame.BackgroundColor3 = Color3.fromRGB(10, 0, 20)
+ContentFrame.BorderColor3 = Color3.fromRGB(170, 0, 255)
+ContentFrame.BorderSizePixel = 2
+ContentFrame.Parent = MainFrame
+
+local UIListLayout = Instance.new("UIListLayout", TabHolder)
+UIListLayout.Padding = UDim.new(0, 5)
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+
+local function CreateTab(name)
+    local TabButton = Instance.new("TextButton")
+    TabButton.Size = UDim2.new(1, -10, 0, 35)
+    TabButton.BackgroundColor3 = Color3.fromRGB(50, 0, 80)
+    TabButton.BorderColor3 = Color3.fromRGB(170, 0, 255)
+    TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TabButton.Font = Enum.Font.Gotham
+    TabButton.TextSize = 16
+    TabButton.Text = name
+    TabButton.Parent = TabHolder
+
+    local TabContent = Instance.new("ScrollingFrame")
+    TabContent.Size = UDim2.new(1, 0, 1, 0)
+    TabContent.BackgroundTransparency = 1
+    TabContent.Visible = false
+    TabContent.Parent = ContentFrame
+
+    local TabLayout = Instance.new("UIListLayout", TabContent)
+    TabLayout.Padding = UDim.new(0, 8)
+    TabLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    TabLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+
+    TabButton.MouseButton1Click:Connect(function()
+        for _, c in pairs(ContentFrame:GetChildren()) do
+            if c:IsA("ScrollingFrame") then c.Visible = false end
+        end
+        TabContent.Visible = true
+    end)
+
+    return TabContent
+end
+
+local function AddButton(parent, text, callback)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0.9, 0, 0, 35)
+    btn.BackgroundColor3 = Color3.fromRGB(80, 0, 120)
+    btn.BorderColor3 = Color3.fromRGB(170, 0, 255)
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.Font = Enum.Font.Gotham
+    btn.TextSize = 16
+    btn.Text = text
+    btn.Parent = parent
+    btn.MouseButton1Click:Connect(callback)
+end
+
+local function AddDropdown(parent, text, options, callback)
+    local Frame = Instance.new("Frame")
+    Frame.Size = UDim2.new(0.9, 0, 0, 35)
+    Frame.BackgroundColor3 = Color3.fromRGB(50, 0, 80)
+    Frame.BorderColor3 = Color3.fromRGB(170, 0, 255)
+    Frame.Parent = parent
+
+    local Label = Instance.new("TextLabel")
+    Label.Text = text
+    Label.Size = UDim2.new(1, -20, 1, 0)
+    Label.Position = UDim2.new(0, 10, 0, 0)
+    Label.BackgroundTransparency = 1
+    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Label.Font = Enum.Font.Gotham
+    Label.TextSize = 16
+    Label.TextXAlignment = Enum.TextXAlignment.Left
+    Label.Parent = Frame
+
+    local Box = Instance.new("TextButton")
+    Box.Text = "▼"
+    Box.Size = UDim2.new(0, 20, 0, 20)
+    Box.Position = UDim2.new(1, -25, 0.5, -10)
+    Box.BackgroundColor3 = Color3.fromRGB(80, 0, 120)
+    Box.BorderColor3 = Color3.fromRGB(170, 0, 255)
+    Box.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Box.Font = Enum.Font.GothamBold
+    Box.TextSize = 14
+    Box.Parent = Frame
+
+    local DropFrame = Instance.new("Frame")
+    DropFrame.Size = UDim2.new(0.9, 0, 0, #options * 30)
+    DropFrame.BackgroundColor3 = Color3.fromRGB(25, 0, 45)
+    DropFrame.BorderColor3 = Color3.fromRGB(170, 0, 255)
+    DropFrame.Visible = false
+    DropFrame.Parent = parent
+
+    local Layout = Instance.new("UIListLayout", DropFrame)
+    Layout.Padding = UDim.new(0, 3)
+    Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    Layout.VerticalAlignment = Enum.VerticalAlignment.Top
+
+    for _, opt in ipairs(options) do
+        local optBtn = Instance.new("TextButton")
+        optBtn.Size = UDim2.new(1, -10, 0, 25)
+        optBtn.BackgroundColor3 = Color3.fromRGB(50, 0, 80)
+        optBtn.BorderColor3 = Color3.fromRGB(170, 0, 255)
+        optBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        optBtn.Font = Enum.Font.Gotham
+        optBtn.TextSize = 14
+        optBtn.Text = opt
+        optBtn.Parent = DropFrame
+        optBtn.MouseButton1Click:Connect(function()
+            callback(opt)
+            DropFrame.Visible = false
+        end)
+    end
+
+    Box.MouseButton1Click:Connect(function()
+        DropFrame.Visible = not DropFrame.Visible
+    end)
+end
+
+local function AddTextbox(parent, placeholder, callback)
+    local Box = Instance.new("TextBox")
+    Box.Size = UDim2.new(0.9, 0, 0, 35)
+    Box.BackgroundColor3 = Color3.fromRGB(60, 0, 90)
+    Box.BorderColor3 = Color3.fromRGB(170, 0, 255)
+    Box.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Box.PlaceholderText = placeholder
+    Box.Font = Enum.Font.Gotham
+    Box.TextSize = 16
+    Box.Parent = parent
+    Box.FocusLost:Connect(function()
+        callback(Box.Text)
+    end)
+end
+
+local function AddNotification(text)
+    local Frame = Instance.new("Frame")
+    Frame.Size = UDim2.new(0, 400, 0, 60)
+    Frame.Position = UDim2.new(0.5, -200, 1, -80)
+    Frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    Frame.BorderColor3 = Color3.fromRGB(170, 0, 255)
+    Frame.BorderSizePixel = 2
+    Frame.Parent = ScreenGui
+    Frame.BackgroundTransparency = 0.1
+
+    local Icon = Instance.new("ImageLabel")
+    Icon.Image = "rbxassetid://83554422321074"
+    Icon.Size = UDim2.new(0, 45, 0, 45)
+    Icon.Position = UDim2.new(0, 10, 0.5, -22)
+    Icon.BackgroundTransparency = 1
+    Icon.Parent = Frame
+
+    local Label = Instance.new("TextLabel")
+    Label.Text = text
+    Label.Size = UDim2.new(1, -70, 1, 0)
+    Label.Position = UDim2.new(0, 60, 0, 0)
+    Label.BackgroundTransparency = 1
+    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Label.Font = Enum.Font.Gotham
+    Label.TextSize = 16
+    Label.TextXAlignment = Enum.TextXAlignment.Left
+    Label.Parent = Frame
+
+    Frame.Position = UDim2.new(0.5, -200, 1, 60)
+    TweenService:Create(Frame, TweenInfo.new(0.5, Enum.EasingStyle.Quad), {Position = UDim2.new(0.5, -200, 1, -80)}):Play()
+    task.wait(4)
+    TweenService:Create(Frame, TweenInfo.new(0.5, Enum.EasingStyle.Quad), {Position = UDim2.new(0.5, -200, 1, 60)}):Play()
+    task.wait(0.5)
+    Frame:Destroy()
+end
+
+local ExampleTab = CreateTab("Main")
+AddButton(ExampleTab, "Click Me", function()
+    AddNotification("You clicked the button!")
+end)
+AddDropdown(ExampleTab, "Choose Option", {"A", "B", "C"}, function(opt)
+    AddNotification("You selected " .. opt)
+end)
+AddTextbox(ExampleTab, "Type here...", function(txt)
+    AddNotification("You wrote: " .. txt)
+end)
+ExampleTab.Visible = true
+
+local OpenAnimInfo = TweenInfo.new(0.6, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local CloseAnimInfo = TweenInfo.new(0.6, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
+
+local function AnimateOpen()
+    MainFrame.Visible = true
+    MainFrame.Size = UDim2.new(0, 650, 0, 0)
+    TweenService:Create(MainFrame, OpenAnimInfo, {Size = UDim2.new(0, 650, 0, 420)}):Play()
+end
+
+local function AnimateClose()
+    TweenService:Create(MainFrame, CloseAnimInfo, {Size = UDim2.new(0, 650, 0, 0)}):Play()
+    task.wait(0.6)
+    MainFrame.Visible = false
+end
+
+OpenButton.MouseButton1Click:Connect(function()
+    OpenButton.Visible = false
+    AnimateOpen()
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+    AnimateClose()
+    OpenButton.Visible = true
+end)
