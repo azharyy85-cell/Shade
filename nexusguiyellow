@@ -7,56 +7,55 @@ local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
-
 local redzlib = {
 	Themes = {
 		Darker = {
 			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 40, 0)),
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(60, 60, 0)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 40, 0))
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 0, 40)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(60, 0, 60)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 0, 40))
 			}),
-			["Color Hub 2"] = Color3.fromRGB(50, 50, 0),
-			["Color Stroke"] = Color3.fromRGB(80, 80, 0),
-			["Color Theme"] = Color3.fromRGB(255, 255, 50),
-			["Color Text"] = Color3.fromRGB(243, 243, 243),
-			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
+			["Color Hub 2"] = Color3.fromRGB(50, 0, 50),
+			["Color Stroke"] = Color3.fromRGB(80, 0, 80),
+			["Color Theme"] = Color3.fromRGB(255, 105, 180),
+			["Color Text"] = Color3.fromRGB(243, 200, 243),
+			["Color Dark Text"] = Color3.fromRGB(200, 150, 200)
 		},
 		Dark = {
 			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 60, 0)),
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(80, 80, 0)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(60, 60, 0))
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 0, 60)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(80, 0, 80)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(60, 0, 60))
 			}),
-			["Color Hub 2"] = Color3.fromRGB(70, 70, 0),
-			["Color Stroke"] = Color3.fromRGB(100, 100, 0),
-			["Color Theme"] = Color3.fromRGB(255, 255, 75),
-			["Color Text"] = Color3.fromRGB(245, 245, 245),
-			["Color Dark Text"] = Color3.fromRGB(190, 190, 190)
+			["Color Hub 2"] = Color3.fromRGB(70, 0, 70),
+			["Color Stroke"] = Color3.fromRGB(100, 0, 100),
+			["Color Theme"] = Color3.fromRGB(255, 120, 190),
+			["Color Text"] = Color3.fromRGB(245, 210, 245),
+			["Color Dark Text"] = Color3.fromRGB(210, 170, 210)
 		},
 		Purple = {
 			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(50, 50, 0)),
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(70, 70, 0)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(50, 50, 0))
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(50, 0, 50)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(70, 0, 70)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(50, 0, 50))
 			}),
-			["Color Hub 2"] = Color3.fromRGB(60, 60, 0),
-			["Color Stroke"] = Color3.fromRGB(90, 90, 0),
-			["Color Theme"] = Color3.fromRGB(255, 255, 100),
-			["Color Text"] = Color3.fromRGB(240, 240, 240),
-			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
-			["Color Dark Purple"] = Color3.fromRGB(200, 200, 50),
-			["Color Hub 9"] = Color3.fromRGB(0, 0, 0, 0),
-			["Color Dark Greem"] = Color3.fromRGB(255, 255, 0)
+			["Color Hub 2"] = Color3.fromRGB(60, 0, 60),
+			["Color Stroke"] = Color3.fromRGB(90, 0, 90),
+			["Color Theme"] = Color3.fromRGB(255, 130, 200),
+			["Color Text"] = Color3.fromRGB(240, 200, 240),
+			["Color Dark Text"] = Color3.fromRGB(200, 150, 200),
+			["Color Dark Purple"] = Color3.fromRGB(255, 150, 220),
+			["Color Hub 9"] = Color3.fromRGB(0, 0, 0),
+			["Color Dark Greem"] = Color3.fromRGB(255, 100, 180)
 		}
 	},
 	Info = {
-		Version = "1.1.0"
+		Version = "1.2.0"
 	},
 	Save = {
-		UISize = {460, 280},
-		TabSize = 145,
-		Theme = "Darker"
+		UISize = {550, 380},
+		TabSize = 160,
+		Theme = "Purple" 
 	},
 	Settings = {},
 	Connection = {},
@@ -66,9 +65,8 @@ local redzlib = {
 	Flags = {},
 	Tabs = {},
 	Icons = (function()
-	  -- ايقونات التابات
 		return {
-			["accessibility"] = "rbxassetid://10709751939",
+		    ["accessibility"] = "rbxassetid://10709751939",
 			["activity"] = "rbxassetid://10709752035",
 			["airvent"] = "rbxassetid://10709752131",
 			["airplay"] = "rbxassetid://10709752254",
