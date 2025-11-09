@@ -51,12 +51,12 @@ local redzlib = {
 		}
 	},
 	Info = {
-		Version = "1.2.0"
+		Version = "1.1.0"
 	},
 	Save = {
-		UISize = {550, 380},
-		TabSize = 160,
-		Theme = "Purple" 
+		UISize = {460, 280},
+		TabSize = 145,
+		Theme = "Darker"
 	},
 	Settings = {},
 	Connection = {},
@@ -66,9 +66,9 @@ local redzlib = {
 	Flags = {},
 	Tabs = {},
 	Icons = (function()
+	  -- ايقونات التابات
 		return {
-
-		    ["accessibility"] = "rbxassetid://10709751939",
+			["accessibility"] = "rbxassetid://10709751939",
 			["activity"] = "rbxassetid://10709752035",
 			["airvent"] = "rbxassetid://10709752131",
 			["airplay"] = "rbxassetid://10709752254",
