@@ -2769,7 +2769,7 @@ end
 		Size = UDim2.new(1, 0, 0, 65),
 		AnchorPoint = Vector2.new(0, 1),
 		Position = UDim2.new(0, 0, 1),
-		BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+		BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 	}), "Frame") Make("Corner", FrameHolder)
 
 	local ImageLabel = Create("ImageLabel", FrameHolder, {
@@ -2796,7 +2796,7 @@ end
 		TextWrapped = true,
 		AutomaticSize = "Y",
 		Font = Enum.Font.Gotham,
-		TextColor3 = Color3.fromRGB(190, 150, 255),
+		TextColor3 = Color3.fromRGB(0, 0, 255),
 		TextXAlignment = "Left",
 		BackgroundTransparency = 1,
 		TextSize = 8,
@@ -2827,7 +2827,7 @@ end
 		}) task.wait(5)
 		SetProps(JoinButton, {
 			Text = "Join",
-			BackgroundColor3 = Color3.fromRGB(120, 60, 200),
+			BackgroundColor3 = Color3.fromRGB(250, 0, 0),
 			TextColor3 = Color3.fromRGB(240, 220, 255)
 		}) ClickDelay = false
 	end)
@@ -2852,4 +2852,3 @@ return redzlib
 
 -- NEXUS LIB
 -- by Shadow
--- new
